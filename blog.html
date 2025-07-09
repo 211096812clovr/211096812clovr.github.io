@@ -37,19 +37,38 @@
 </div>
    
 
-  <script>
-    function showhide(id) {
-      const entries = document.querySelectorAll('#content > div');
-      entries.forEach(div => {
-        if (div.id === id) {
-          // Toggle the selected div
-          div.style.display = (div.style.display === 'block') ? 'none' : 'block';
-        } else {
-          // Hide all other divs
-          div.style.display = 'none';
+<script>
+var divState = {};
+
+function showhide(id) {
+    if (document.getElementById) {
+        var divid = document.getElementById(id);
+        if (!divid) return; // Prevent error if ID doesn't exist
+
+        // Initialize all divs to hidden if not already tracked
+        if (!(id in divState)) {
+            divState[id] = false;
+            divid.style.display = 'none';
         }
-      });
+
+        // Toggle selected div
+        var isVisible = divState[id];
+        for (var div in divState) {
+            if (divState[div] && div !== id) {
+                document.getElementById(div).style.display = 'none';
+                divState[div] = false;
+            }
+        }
+
+        if (!isVisible) {
+            divid.style.display = 'block';
+            divState[id] = true;
+        } else {
+            divid.style.display = 'none';
+            divState[id] = false;
+        }
     }
-  </script>
+}
+</script>
 </body>
 </html>
