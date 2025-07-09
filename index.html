@@ -121,20 +121,37 @@ body a{color:blue;
 </style>
 
 </body>
-    <script>var divState = {};
+<script>
+var divState = {};
+
 function showhide(id) {
     if (document.getElementById) {
         var divid = document.getElementById(id);
-        divState[id] = (divState[id]) ? false : true;
-        //close others
-        for (var div in divState){
-            if (divState[div] && div != id){
+        if (!divid) return; // Prevent error if ID doesn't exist
+
+        // Initialize all divs to hidden if not already tracked
+        if (!(id in divState)) {
+            divState[id] = false;
+            divid.style.display = 'none';
+        }
+
+        // Toggle selected div
+        var isVisible = divState[id];
+        for (var div in divState) {
+            if (divState[div] && div !== id) {
                 document.getElementById(div).style.display = 'none';
                 divState[div] = false;
             }
         }
-        divid.style.display = (divid.style.display == 'block' ? 'none' : 'block');
-    }
-}</script>
 
+        if (!isVisible) {
+            divid.style.display = 'block';
+            divState[id] = true;
+        } else {
+            divid.style.display = 'none';
+            divState[id] = false;
+        }
+    }
+}
+</script>
 </html>
