@@ -35,11 +35,7 @@ ul {list-style-type:none;}
 
 #main {
 width:50%;
-position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
+margin:auto;
     
 }
 
@@ -82,9 +78,10 @@ body a{color:blue;
 }
 
 #contain {
-  display:         flex;
-  flex-wrap:       wrap;
-  justify-content: center;
+  
+  display: table-cell;
+    vertical-align: middle;
+    text-align:center
 }
 @media (max-width: 480px) {
     #main {width:100% !important;}
