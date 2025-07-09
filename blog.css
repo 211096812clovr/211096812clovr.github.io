@@ -10,6 +10,7 @@ body {
 body {
   -ms-overflow-style: none; 
   scrollbar-width: none; 
+ font-family: 'Courier New', monospace;
 }
 #main {
 width:80%;
