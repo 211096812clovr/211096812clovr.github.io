@@ -65,6 +65,7 @@ ul {list-style-type:none;}
   display:         flex;
   flex-wrap:       wrap;
   justify-content: center;
+ gap:1.5%;
 }
 
 .date {border-bottom: .2em dashed blue;
