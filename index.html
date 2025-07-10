@@ -36,11 +36,12 @@ ul {list-style-type:none;}
 #main {
 width:50%;
 margin:auto;
-   position: absolute;
+    position: absolute;
       top: 40%;
       left: 50%;
       margin-right: -50%;
       transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 h1, h2, h3 {font-family: 'Comic Sans MS', monospace;
@@ -82,9 +83,10 @@ body a{color:blue;
 }
 
 #contain {
-  
-  display: table-cell;
-    vertical-align: middle;
+display: flex;
+
+  justify-content: center;
+  align-items: center;
     text-align:center
 }
 @media (max-width: 480px) {
