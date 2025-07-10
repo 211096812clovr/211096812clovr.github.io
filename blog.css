@@ -22,6 +22,10 @@ width:80%;
  margin:auto;
 }
 
+.box2, #shortnav, .navi {
+  margin: 0;
+  padding: 1%;
+}
 
 h1, h2, h3 {font-family: 'Comic Sans MS', monospace;
 color:red;
