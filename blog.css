@@ -19,6 +19,10 @@ body {
 #main {
 width:80%;
  margin:auto;
+   display:         flex;
+  flex-wrap:       nowrap;
+  justify-content: center;
+ gap:1.5%;
 }
 
 .box2, #shortnav, .navi {
@@ -68,12 +72,7 @@ body { -ms-overflow-style: none; } /* IE and Edge */
 body::-webkit-scrollbar, body::-webkit-scrollbar-button { display: none; } /* Chrome */
 
 ul {list-style-type:none;}
-#contain {
-  display:         flex;
-  flex-wrap:       nowrap;
-  justify-content: center;
- gap:1.5%;
-}
+
 
 .date {border-bottom: .2em dashed blue;
 text-align: right;}
