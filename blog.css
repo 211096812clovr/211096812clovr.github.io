@@ -74,10 +74,7 @@ text-align: right;}
 :root {
                 --body-bg-image: url('https://i.imgur.com/RdOdnfp.gif');
             }
-body {
-  color: black;
-  font-family: Verdana, monospace;
-}
+
 html{ overflow-y:scroll; }
 .notepad {background-image: url("https://i.imgur.com/wEplSWy.png");
 background-position: center;
