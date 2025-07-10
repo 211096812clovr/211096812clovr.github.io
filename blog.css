@@ -1,7 +1,8 @@
-body {
+ body {
  background-image: url('https://i.imgur.com/c1APieV.gif');
  background-size: cover; 
  color: black;
+ font-family: 'Courier New', monospace;
  font-size:1.1em;
 }
 :-webkit-scrollbar {
@@ -10,7 +11,6 @@ body {
 body {
   -ms-overflow-style: none; 
   scrollbar-width: none; 
- font-family: 'Courier New', monospace;
 }
 #main {
 width:80%;
@@ -19,6 +19,7 @@ margin:auto;
 
 
 h1, h2, h3 {font-family: 'Comic Sans MS', monospace;
+font-variant:small-caps;
 color:red;
   text-shadow:
     1px 1px 0 #000,
@@ -70,10 +71,6 @@ ul {list-style-type:none;}
 .date {border-bottom: .2em dashed blue;
 text-align: right;}
 
-
-/* CSS is how you can add style to your website, such as colors, fonts, and positioning of your
-   HTML content. To learn how to do something, just try searching Google for questions like
-   "how to change link color." */
 :root {
                 --body-bg-image: url('https://i.imgur.com/RdOdnfp.gif');
             }
