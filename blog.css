@@ -48,11 +48,13 @@ p {margin:2%}
   margin-left:auto;
   margin-right:auto;
   padding:.5%;
+ width:20.5%;
 }
 
 .box2 {
   background-color: #ffffff;
   margin-top:.5%; 
+ width: 73%;
   padding:1%;
   overflow-y:scroll;
    -ms-overflow-style: none;  /* IE and Edge */
