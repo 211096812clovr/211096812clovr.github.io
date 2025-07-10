@@ -48,6 +48,7 @@ p {margin:2%}
   background-color: #ffffff;
   border: .1em black solid;
   margin-top:.5%;
+  flex: 0 0 23%;
   padding:.5%;
  width:23%;
 }
@@ -56,6 +57,7 @@ p {margin:2%}
   background-color: #ffffff;
   margin-top:.5%; 
  width: 73.5%;
+  flex: 0 0 73.5%;
   padding:1%;
   overflow-y:scroll;
    -ms-overflow-style: none;  /* IE and Edge */
