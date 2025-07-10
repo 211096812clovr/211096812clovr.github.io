@@ -91,14 +91,6 @@ width:100%;
 font-variant:small-caps;
   font-size:1.2em;
 }
-.gallery img{transition:all 0.2s linear;}
-.gallery img:hover {transform: scale(1.5);}
-.blur { -webkit-filter: blur(3px);
- filter: blur(3px);}
-  .blur:hover {-webkit-filter: blur(0);
- filter: blur(0);
- -webkit-transition: .3s ease-in-out;
- transition: .3s ease-in-out;}
 #container {
   max-width:1040px;
  margin:auto;
@@ -115,7 +107,8 @@ font-variant:small-caps;
   text-align:center;
   background-color:white;
     word-spacing:2em;
-  width:97%;}
+  width: 100%;
+  margin: 0 auto;}
 @media (max-width: 600px) {
     #main {width:100%;}
     #shortnav {height:auto;}
