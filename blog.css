@@ -9,6 +9,8 @@
   display: none;
 }
 * {
+ margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 body {
@@ -17,7 +19,6 @@ body {
 }
 #main {
 width:80%;
-margin:auto;
 }
 
 
@@ -43,8 +44,6 @@ p {margin:2%}
   background-color: #ffffff;
   border: .1em black solid;
   margin-top:.5%;
-  margin-left:auto;
-  margin-right:auto; 
   padding:.5%;
 }
 
@@ -76,52 +75,8 @@ text-align: right;}
             }
 
 html{ overflow-y:scroll; }
-.notepad {background-image: url("https://i.imgur.com/wEplSWy.png");
-background-position: center;
-background-repeat: no-repeat;
-background-size:50%;
-width:67%;
-height:43em;
-margin: auto;
-padding:2%;}
-.left {width:41%;
-height:80%;
-display: inline-block;
-vertical-align:top;
-text-align:center;
-margin-left:5%;}
-.right {width:41%;
-height:80%;
-display: inline-block;
-vertical-align:top;
-text-align:center;
-margin-left:7.5%}
-.m {margin-left:3.4em;}
-.head {display:inline-block;
-text-align:center;}
-.notepad2 {background-image: url("https://i.imgur.com/ddgg4gk.png");
-background-position: center;
-background-repeat: no-repeat;
-background-size:100%;
-width:67%;
-height:43em;
-margin: auto;
-padding:2%; 
-}
-.big {list-style: none;
-margin-left:3%;
-}
-.small {list-style:none;}
-summary {font-family: Verdana, monospace;
-font-variant:small-caps;
-font-size:1.2em;}
-.cow img{width:30%;
-height:auto;
-position:relative;
-  transition:all 0.2s linear;}
-.cow img:hover{
-transform: scale(1.1);
-}
+
+
 h1, h2, h3 {font-family: Verdana, monospace;
 font-variant:small-caps;}
 h1 {font-size:2.3em;}
@@ -143,7 +98,6 @@ font-variant:small-caps;
  transition: .3s ease-in-out;}
 #container {
   max-width:1040px;
-  margin:auto;
   }
   body a{color:blue;
   text-decoration:none;}
@@ -152,21 +106,6 @@ font-variant:small-caps;
   body a:active{color:purple;
   text-decoration:underline;}
 
-  .navbar {margin-bottom:1em;
-  margin-top:1em;
-  display:flex;
-  flex-direction:row;
-  margin-left:auto;}
-  .floaty {display:flex;
-  flex-direction:row;}
-  .top {
-  border: .9em solid transparent;
-  background-color:white;
-  border-image: url(https://i.imgur.com/6rFzNqj.png) 120 stretch;
-  width:35%;
-  text-align:center;
-  margin:auto;}
-  
   .navi{
   padding:.5%;
   text-align:center;
@@ -198,48 +137,8 @@ font-variant:small-caps;
     -1px -1px 0 #000,
     1px -1px 0 #000;
     text-decoration:none !important;}
-  main {width:100%;
-  margin:auto;}
-  
-  .enter {background-color:white;
-  border: black .2em solid;
-  font-size:1em;
-  padding:.4em;}
-  
-  .enter:hover {background-color:grey;}
-  .open {
-  width:90%;
-  margin:auto;
-  margin-top:1.5em;
-  padding:1%;
-  height:auto;
-  font-variant:small-caps;
-  font-size:1.2em;
-  line-height:2.5em;}
-  
-  .q {width:43%;}
-  .mouse1{
-  width:30%;
-  margin-left:1em;
-  margin-top:1%;
-  height:auto;
-  font-variant:small-caps;
-  font-size:1.2em;
-  }
-  
-  .mouse2 {  text-align:center;
-    width:55%;
-  margin-left:auto;
-  height:auto;
-  margin-top:1%;
-  font-variant:small-caps;
-  font-size:1.2em;
-  padding:2%;}
-  
-  
-  .open a{text-align:center;
-  display:block;}
-  
+  main {width:100%;}
+
   @media screen and (max-width: 600px) {
     #container {width:100%;}
     .navbar {flex-direction:column;}
