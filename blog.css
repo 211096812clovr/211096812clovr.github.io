@@ -19,6 +19,7 @@ body {
 }
 #main {
 width:80%;
+ box-sizing: border-box
 }
 
 
