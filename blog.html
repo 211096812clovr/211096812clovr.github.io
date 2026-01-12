@@ -26,6 +26,10 @@
     -ms-overflow-style: none; 
     scrollbar-width: none; 
   }
+  *, *::before, *::after {
+  box-sizing: border-box;
+}
+
   #main {
   width:80%;
   margin:auto;
@@ -211,7 +215,10 @@
     overflow: hidden;
   }
 
-
+ #main {
+    width: 100% !important;
+    margin: 0 !important;
+  }
     
   #contain {
     flex-direction: column !important;
