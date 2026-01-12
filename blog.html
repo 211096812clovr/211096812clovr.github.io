@@ -212,15 +212,21 @@
   }
 
 
+    
   #contain {
-    flex-direction: column;
-    height: calc(100vh - 6rem);
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+  }
+
+  #contain > .box2 {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .box2 {
     width: 100% !important;
     height: 65vh !important;
-    overflow-y: auto !important;
+    overflow-y: scroll !important;
   }
 
   #shortnav {
