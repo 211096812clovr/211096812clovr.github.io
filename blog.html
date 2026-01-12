@@ -205,36 +205,45 @@
   
   @media (max-width: 600px) {
 
+  /* Lock the page */
   html, body {
     height: 100%;
     overflow: hidden;
   }
 
+  /* Stack panels vertically */
   #contain {
     flex-direction: column;
-    height: calc(100vh - 6rem);
+    height: calc(100vh - 6rem); /* header height */
   }
 
+  /* Main content panel */
   .box2 {
     width: 100% !important;
     height: 65vh !important;
     overflow-y: auto !important;
   }
 
+  /* Navigation panel underneath */
   #shortnav {
     width: 100% !important;
     height: 20vh !important;
+    margin-top: 0.5rem;
     overflow-y: auto;
+    text-align: center;
   }
 
+  /* Scale header */
   .navi h2 {
     font-size: 5vw;
   }
 
+  /* Hide decorative image */
   #images {
     display: none;
   }
 }
+
 
   
 
