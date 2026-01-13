@@ -220,11 +220,15 @@
     flex-wrap: nowrap;
     width: 100%;
   }
+.blogimg > * {
+  flex: 1 1 0;
+  min-width: 0;   
+  height: 22vw;
+}
 
-  .blogimg img {
-    flex: 0 0 33%;
-    height: 22vw !important;        
+  .blogimg img {       
     object-fit: cover;
+    display: block;
   }
 }
         
