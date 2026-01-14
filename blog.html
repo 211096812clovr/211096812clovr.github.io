@@ -79,25 +79,6 @@
   }
   
   
-  h1, h2, h3 {font-family: 'Comic Sans MS', monospace;
-  font-variant:small-caps;
-  color:red;
-    text-shadow:
-      1px 1px 0 #000,
-      -1px 1px 0 #000,
-      -1px -1px 0 #000,
-      1px -1px 0 #000;}
-  h1 {font-size:2.3em;}
-  h2 {font-size:1.8em;}
-  h3 {font-size:1.4em;}
-  p {margin:2%}
-  .box2 a{color:blue;
-    text-decoration:none;}
-    .box2 a:hover{color:red;
-    text-decoration:underline;}
-    .box2 a:active{color:purple;
-    text-decoration:underline;}
-   .box2 a:visited{color:purple;}
   .box {
     background-color: #ffffff;
     border: .1em black solid;
@@ -257,7 +238,6 @@
   }
 
   .box2 {
-    border: .1em black solid !important;
     width: 100% !important;
     height: 90vh !important;
     overflow-y: scroll !important;
@@ -265,8 +245,11 @@
     margin-top:.5%; 
     padding:1%;
     overflow-y:scroll;
-     -ms-overflow-style: none;  /* IE and Edge */
+    -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;
+    border-left: .1em black solid;
+    border-top:.1em black solid;
+    border-bottom:.1em black solid;
   }
 
 .blogimg img {
@@ -301,8 +284,7 @@
 <div class="navi" style="border: .1em black solid">
     <h2><a href="/index">211096812clovr.github.io</a><a href="/clover">&#9752;</a>
   </div>
-<div id="contain"><div class="box2" style="width:75%; border-left:.1em black solid;
- border-top:.1em black solid; border-bottom:.1em black solid; ">
+<div id="contain"><div class="box2">
 <div id="content">
   <div id="entry11"><div style="border-bottom: .2em dashed blue; text-align:right;">1/03/2026</div><p>
     Yay! new year... to celebrate my 2 friends came over with synthetic shrooms, we split up 2 packs of 
@@ -428,13 +410,11 @@ function showhide(id) {
         var divid = document.getElementById(id);
         if (!divid) return; // Prevent error if ID doesn't exist
 
-        // Initialize all divs to hidden if not already tracked
         if (!(id in divState)) {
             divState[id] = false;
             divid.style.display = 'none';
         }
 
-        // Toggle selected div
         var isVisible = divState[id];
         for (var div in divState) {
             if (divState[div] && div !== id) {
