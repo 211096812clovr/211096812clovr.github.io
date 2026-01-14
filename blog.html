@@ -194,11 +194,16 @@
   }
 
   .blogimg {
+    display:flex;
     flex-wrap: nowrap;
     width: 100%;
     justify-content: center;
   }
-
+.blogimg img {width: 33%;
+  height: 10em;    
+  object-fit: cover;
+  display: block;}
+        
 @media (min-width: 750px) and (max-width: 1445px) {
   .blogimg {
     display: flex;
