@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="main/blog.css">
+    <title>DOOMED YURI</title>
+	<!-- 1. IMPORT GOOGLE FONTS HERE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Loads Pirata One (Gothic Album Title) and VT323 (Retro Zine Text) -->
+    <link href="https://googleapis.com/css2?family=Pirata+One&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://files.catbox.moe/96fd29.jpg');
+            background-size: 25% auto;
+            margin: 0;
+            padding: 0;
+            font-family: "Courier New", Courier, monospace;
+            overflow-x: hidden; /* Stops horizontal screen breakages */
+            color: #333;
+			
+        }
+
+::-webkit-scrollbar {
+    width: 14px;
+    background-color: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #fd77b4;
+    background-image: repeating-linear-gradient(45deg, 
+        #fd77b4, #fd77b4 8px, 
+        #fff 8px, #fff 16px, 
+        #000 16px, #000 24px);
+    border: 2px solid #fff;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #ff9ccb;
+}
+
+/* 1. Firefox Rules */
+html {
+    /* First color is the thumb, second is the track */
+    scrollbar-color: #fd77b4 #000; 
+    scrollbar-width: thin;
+}
+
+/* 2. Chrome/Edge/Safari Rules */
+::-webkit-scrollbar {
+    width: 14px;
+    background-color: #000;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #fd77b4;
+    background-image: repeating-linear-gradient(45deg, 
+        #fd77b4, #fd77b4 8px, 
+        #fff 8px, #fff 16px, 
+        #000 16px, #000 24px);
+    border: 2px solid #fff;
+    border-radius: 4px;
+}
+
+        /* Continuous scrolling text bar at top */
+        .shrine-marquee {
+            background: #fd77b4;
+            color: white;
+            padding: 5px 0;
+            font-weight: bold;
+            border-bottom: 2px dashed white;
+            font-size: 14px;
+        }
+
+        /* Scrapbook Canvas */
+        .shrine-canvas {
+            position: relative;
+            width: 100%;
+            min-height: 160vh; /* Plenty of vertical space to scatter items */
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-top: 40px;
+        }
+
+        /* Base properties for all floating objects */
+        .shrine-piece {
+            position: absolute;
+            box-sizing: border-box;
+            transition: transform 0.2s ease, z-index 0.2s ease;
+        }
+        
+        .shrine-piece:hover {
+            transform: scale(1.08) rotate(0deg) !important;
+            z-index: 999 !important;
+        }
+
+        /* --- THE POSITIONING RULES --- */
+
+        /* Central Focal Point Image */
+        .pic-center {
+            width: 35%;
+            top: 18.5%;
+            left: 36%;
+            transform: translate(-0%, -0%);
+            z-index: 10; /* Keeps it prominent */
+        }
+
+        /* Main Animated Header Box */
+        .title-box {
+            width: 42%;
+            top: 4%;
+            left: 7%;
+            z-index: 12;
+            transform: rotate(-2deg);
+        }
+
+        /* Audio Music Player Box */
+        .music-player-box {
+            width: 35%;
+            top: 8%;
+            right: 8%;
+            z-index: 11;
+            transform: rotate(4deg);
+        }
+
+        /* Chaotic Scattered Image 2 */
+        .pic-scattered {
+            width: 33%;
+            top: 103%;
+            left: 5%;
+            z-index: 4;
+            transform: rotate(-2deg);
+        }
+		.fixed-video-container {
+		  position: absolute;
+		  bottom: 7.5%;   
+		  right: 0%;     
+		  width: 30%;      
+		  aspect-ratio: 16 / 9; 
+		  z-index: 10;   
+		}
+
+		.fixed-video-container iframe {
+		  width: 100%;     
+		  height: 100%;     
+		}
+        /* Random Text Blurb 1 */
+        .blurb-one {
+            width: 27%;
+            top: 23%;
+            right: 2.5%;
+            z-index: 6;
+            transform: rotate(0deg);
+            font-size: 12px;
+        }
+		
+		        .blurb-1 {
+            width: 27%;
+            top: 45%;
+            right: 2.5%;
+            z-index: 6;
+            transform: rotate(-3deg);
+            font-size: 12px;
+        }
+				 .blurb-3 {
+            width: 27%;
+            top: 57%;
+            right: 70%;
+            z-index: 6;
+            transform: rotate(0deg);
+            font-size: 12px;
+        }
+            
+				 .blurb-4 {
+            width: 27%;
+            top: 88.7%;
+            right: 36%;
+            z-index: 6;
+            transform: rotate(0deg);
+            font-size: 12px;
+        }
+		
+						 .blurb-5 {
+            width: 48%;
+            top: 131%;
+            right: 24%;
+            z-index: 6;
+            transform: rotate(0deg);
+            font-size: 12px;
+		}
+		
+
+        /* Random Text Blurb 2 */
+        .blurb-two {
+            width: 22%;
+            top: 127%;
+            left: -4%;
+            z-index: 5;
+            transform: rotate(2deg);
+            font-size: 12px;
+        }
+
+        .pic-scattered2 {
+            width: 35%;
+            top: 51%;
+            left: 36%;
+            z-index: 4;
+            transform: rotate(0deg);
+        }
+		
+		 .pic-scattered3 {
+            width: 35%;
+            top: 96%;
+            right: -5%;
+            z-index: 4;
+            transform: rotate(2deg);
+        }
+		
+		        .pic-closeup {
+            width: 28%;
+            top: 30%;
+            left:9%;
+            z-index: 5;
+            transform: rotate(-2deg);
+        }
+				.pic-closeup2 {
+            width: 32%;
+            top: 17.5%;
+            left:-5%;
+            z-index: 6;
+            transform: rotate(0deg);
+        }
+
+
+
+        /* --- DESIGN STYLES --- */
+
+        /* Flashing animated border boxes */
+        .funbox {
+            background-color: white;
+            padding: 15px;
+            background-image: 
+                repeating-linear-gradient(60deg, #fd77b4, #fd77b4 6px, transparent 10px, transparent 14.8px, #fd77b4 18px), 
+                repeating-linear-gradient(150deg, #fd77b4, #fd77b4 6px, transparent 10px, transparent 14.8px, #fd77b4 18px), 
+                repeating-linear-gradient(240deg, #fd77b4, #fd77b4 6px, transparent 10px, transparent 14.8px, #fd77b4 18px), 
+                repeating-linear-gradient(330deg, #fd77b4, #fd77b4 6px, transparent 10px, transparent 14.8px, #fd77b4 18px);
+            background-size: 3px calc(100% + 36px), calc(100% + 36px) 3px, 3px calc(100% + 36px), calc(100% + 36px) 3px;
+            background-position: 0 0, 0 0, 100% 0, 0 100%;
+            background-repeat: no-repeat;
+            animation: borderAnimation 1s infinite linear;
+            box-shadow: 6px 6px 0px rgba(253, 119, 180, 0.3);
+        }
+
+        @keyframes borderAnimation {
+            from { background-position: 0 0, -36px 0, 100% -36px, 0 100%; }
+            to { background-position: 0 -36px, 0 0, 100% 0, -36px 100%; }
+        }
+
+        h1 {
+		 font-family: 'Pirata One', serif;
+            font-weight: 400;
+            font-size: clamp(2rem, 1rem + 3vw, 3.5rem); /* Increased size for gothic style impact */
+            letter-spacing: 2px;
+            font-size: clamp(1.1rem, 0.5rem + 2vw, 2.2rem);
+            margin: 0;
+            color: #fd77b4;
+            text-align: center;
+            text-shadow: 1px 1px 0px #000;
+        }
+
+        .responsive-img {
+            width: 80%;
+            height: auto;
+            display: block;
+            border: 4px solid white;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+        }
+
+        /* Custom Retro Style Music Player UI */
+        .custom-player {
+            text-align: center;
+        }
+        .player-title {
+            font-size: 11px;
+            margin: 0 0 8px 0;
+            font-weight: bold;
+            color: #fd77b4;
+        }
+        audio {
+            width: 100%;
+            height: 30px;
+            outline: none;
+        }
+
+        /* Responsive safety dynamic stack for mobile screens */
+        @media (max-width: 700px) {
+            .shrine-canvas {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                min-height: auto;
+                padding: 10px;
+            }
+            .shrine-piece {
+                position: relative !important;
+                width: 85% !important;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                transform: translate(0, 0) rotate(1deg) !important;
+                margin: 20px 0 !important;
+            }
+            .shrine-piece:nth-child(even) {
+                transform: rotate(-1deg) !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Marquee Banner Element -->
+    <marquee class="shrine-marquee" scrollamount="4">✦ IT'S SO CLEAR THAT ALL WE HAVE NOW ✦ ARE OUR THOUGHTS OF YESTERDAY... ✦</marquee>
+
+    <div class="shrine-canvas">
+
+        <!-- 1. Header Box -->
+        <div class="shrine-piece title-box funbox">
+            <h1>Strawberry Switchblade</h1>
+            <p style="margin: 5px 0 0 0; text-align: center; font-size: 11px;">❀ 1981 - 1986 ❀</p>
+        </div>
+
+        <!-- 2. Retro Music Player Box -->
+        <div class="shrine-piece music-player-box funbox">
+            <div class="custom-player">
+                <p class="player-title"> Now Playing: Since Yesterday.mp3</p>
+                <audio controls>
+                    <source src="https://file.garden/alXGmI_coXedLZrr/Since%20Yesterday.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+
+        <!-- 3. MAIN CENTER IMAGE -->
+        <div class="shrine-piece pic-center">
+            <img class="responsive-img" src="https://strawberryswitchblade.net/wp-content/uploads/2024/09/IMG_9432e-400x400.jpeg" alt="jill bryson and rose mcdowall">
+        </div>
+
+        <!-- 4. Text Blurb One (Right Side Floating) -->
+        <div class="shrine-piece blurb-one funbox" style="background: #ffffff;">
+            <p style="margin: 0; line-height: 1.4;"><b>★ THE MYTH ★</b><br><br>A shortlived synth pop duo formed in Glasgow in 1981 by Jill Bryson and Rose McDowall. Though they never achieved massive commercial success in the West, their signature look - adorning flamboyant polka dots, ribbons and bows - left an indelible mark on the Japanese scene, heavily inspiring the Gothic Lolita fashion movement and bands like Malice Mizer.</p>
+        </div>
+		
+		        <div class="shrine-piece blurb-1 funbox" style="background: #ffffff;">
+            <p style="margin: 0; line-height: 1.4;"><b>★ DOOMED YURI? ★</b><p>McDowall and Bryson's self-titled debut album was released in 1985 through Korova Records, a subsidiary of WEA (warner company). According to Rose, they had little control over the production and weren't happy with the finished product, also dealing with a patronizing manager whom they had to fire. Jill was facing severe agoraphobia at the time which prevented them from huge live opportunities and even recording a second album in Japan with Ryuichi Sakamoto. Jill was pushing away from Rose because of her newfound interest in the occult, making neofolk buddies and collecting nazi memorabilia. They broke up in 1986.</p>
+        </div>
+ <div class="shrine-piece blurb-3 funbox" style="background: #ffffff;">
+            <p style="margin: 0; line-height: 1.4;"><b>★ SHE WAS REALLY SCARED ★</b></p><br><p style="margin: 0; line-height: 1.4;"><i>[Jill had] always had agoraphobia as long as I’d known her. It’s a horrible condition to have, when she was panicking she was really scared. It’s not like ‘I don’t want to do this,’ she was really really scared, scared for her life, that kind of fear. And I know what that feels like from a different kind of angle, being scared for your life – I’ve felt that before but not through agoraphobia. Most people were pretty tolerant I think. Her boyfriend was really good cos he’d go places with her.
+<br><br>
+At the end she was seeing hypnotists and stuff, we’d tried everything, the record company had tried. She’d meditation tapes and all sorts of stuff, and she went to group therapy where people had all sorts of different phobias. And sometimes she would get better. It was completely unpredictable, that was the worst thing about it, it was so completely unpredictable. </i></p>
+        </div>
+
+        <!-- 5. Scattered Image Two (Left Side Floating Lower) -->
+        <div class="shrine-piece pic-scattered">
+            <img class="responsive-img" src="https://strawberryswitchblade.net/wp-content/uploads/2024/09/IMG_9409-scaled-400x400.jpeg" alt="Vintage visual">
+        </div>
+
+        <!-- 6. Text Blurb Two (Left Low Floating) -->
+        <div class="shrine-piece blurb-two funbox">
+            <p style="margin: 0; text-align: center; font-family: 'VT323', monospace;
+            font-size: 12px; /* Pixel fonts look best slightly larger */">☁ ☁ ☁<br><i>Dawn cracks the dark,<br>and it breaks the silence<br>of my waking hours<br>and my heartbeat's license<br><br>For I hate the trees<br>and I hate the flowers<br>and I hate the buildings<br>and the way they tower<br>over me<br>Can't you see?<br>I get so frightened<br>No one else seems frightened<br>Only me, only me</i></p>
+        </div>
+
+        <!-- 7. Text Blurb Three (Bottom Cluster) -->
+        <div class="shrine-piece pic-scattered2">
+            <img class="responsive-img" src="https://files.catbox.moe/rn5a44.jpg">
+        </div>
+		
+		        <div class="shrine-piece pic-scattered3">
+            <img class="responsive-img" src="https://file.garden/alXGmI_coXedLZrr/Rose_Grave_1442301408.jpg">
+        </div>
+
+        <!-- New Close-up Image -->
+        <div class="shrine-piece pic-closeup">
+            <img class="responsive-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNBgqYtL7IHC1PAEpq82YgmdU4XJSVaoLUUN3pvyKKng&s=10" alt="jill and rose close up">
+        </div>
+	
+        <div class="shrine-piece pic-closeup2">
+            <img class="responsive-img" src="https://media.tenor.com/n19oIuXsql4AAAAM/strawberry-switchblade-strawberry.gif" alt="jill and rose close up">
+        </div>
+		<div class="shrine-piece blurb-4 funbox" style="background: #ffffff;">
+            <p style="margin: 0; line-height: 1.4;"><center><b>★ ONLY ME ★</b></center>
+			<BR>I Found their music on a board when I was twelve. I was really into J-fashion and BJDs, creepy cute things. Trees and Flowers was a point of contact for me, Jill's lyrics about her agoraphobia made so much sense.
+<br><br>
+The shift happened later. I stopped wearing the lace and ribbons. Muted colors, quiet clothes. I wanted to be invisible and take up zero space. A surrender to the path of least resistance. It’s easier to go unnoticed than to deal with the constant feedback of being looked at.
+<br><br>
+Instead of shrinking and conforming, Jill treated her clothes like an armor that protected her from the rest of the world. People are predictable, and the ones who judge are usually bored. It doesn't really matter either way.</p></div>
+		 <div class="shrine-piece blurb-5 funbox" style="background: #ffffff;">
+    <p style="margin: 0; line-height: 1.4;">
+        <b>✦ POST-FALLOUT ✦</b><br><br>
+        After Strawberry Switchblade, Rose McDowall moved into the neofolk scene, contributing to projects like Psychic TV and Current 93. While the production moved away from 80s synth-pop, the focus on morbidity and isolation remained consistent throughout her later discography.
+    </p>
+</div>
+
+		
+		<div class="fixed-video-container">
+  <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Hn6xdAfcGQo?si=V_ry-FA9U6L7nluW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+
+    </div>
+</body>
+</html>
