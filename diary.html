@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>/diary/ - The Nexus</title>
+    <style>
+        /* CORE BOARD STYLES (Yotsuba A Aesthetic) */
+        body {
+            background-color: #FFFFEE;
+            color: #800000;
+            font-family: Tahoma, Arial, sans-serif;
+            font-size: 10pt;
+            margin: 0;
+            padding: 0;
+            cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym40.cur'), auto;
+        }
+        a { color: #0000EE; text-decoration: none; }
+        a:hover { color: #DD0000; }
+
+        /* 4CHAN TOP BOARD NAVIGATOR */
+        .board-nav {
+            font-size: 9pt;
+            background-color: #F0E0D6;
+            border-bottom: 1px solid #D9BFB7;
+            padding: 2px 5px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
+            box-sizing: border-box;
+        }
+        .board-nav .boards {
+            font-weight: bold;
+        }
+
+        /* MAIN CONTENT AREA */
+        .main-board {
+            padding: 30px 20px 10px 20px; /* Added top padding to clear the fixed top nav */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .board-title {
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            font-family: Trebuchet MS, sans-serif;
+            color: #AF0A0F;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        /* AD PLACEHOLDERS */
+        .ad-placeholder {
+            border: 1px solid #D9BFB7;
+            background-color: #F0E0D6;
+            color: #AF0A0F;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px auto;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .ad-leaderboard {
+            width: 728px;
+            height: 90px;
+            border: 2px solid #AF0A0F; /* Red border like old ads */
+        }
+        
+        .ad-banner {
+            width: 468px;
+            height: 60px;
+        }
+
+        /* INTERACTIVE POSTING FORM */
+        .postarea { text-align: center; margin-bottom: 20px; }
+        table.postform { margin: 0 auto; text-align: left; background: #F0E0D6; border: 1px solid #000; padding: 2px; }
+        table.postform td { padding: 1px 3px; font-size: 10pt; }
+        .postblock { background: #EA8; color: #800000; font-weight: bold; border: 1px solid #000; }
+        input[type="text"], input[type="file"], textarea { border: 1px solid #AAA; }
+        
+        #submit-btn { transition: transform 0.1s ease-out; cursor: crosshair; }
+
+        /* THREADS */
+        hr { border: 0; border-top: 1px solid #D9BFB7; height: 1px; margin: 15px 0; }
+        .thread { clear: both; margin-bottom: 30px; padding-top: 10px; }
+        .fileinfo { font-size: 8pt; margin-bottom: 2px; }
+        .thumb { float: left; margin: 2px 20px 10px 2px; border: 2px solid #000; cursor: pointer; }
+        
+        .post-header { margin-bottom: 5px; }
+        .subject { color: #CC1105; font-weight: bold; font-size: 11pt; }
+        .name { color: #117743; font-weight: bold; }
+        .post-message { margin: 10px 0 10px 20px; line-height: 1.3; }
+        .greentext { color: #789922; }
+
+        /* REPLIES */
+        .replies-wrapper {
+            display: block;
+        }
+        .reply-container {
+            clear: both;
+            margin: 6px 0 6px 20px;
+        }
+        .reply {
+            background-color: #F0E0D6;
+            border: 1px solid #D9BFB7;
+            display: inline-block;
+            padding: 6px 10px;
+            box-sizing: border-box;
+        }
+        .reply .post-message {
+            margin: 5px 0 0 10px;
+        }
+        .toggle-replies {
+            font-size: 8.5pt;
+            margin-left: 10px;
+            font-weight: normal;
+        }
+
+        /* DRAGGABLE FOOTER & SECRET ZONE */
+        .footer-wrapper {
+            position: relative;
+            margin-top: 50px;
+            height: 100px;
+            text-align: center;
+        }
+        .secret-link {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: "Courier New", monospace;
+            font-size: 16px;
+            color: #ff00ff;
+            background: black;
+            padding: 5px;
+            text-decoration: none;
+            z-index: 1;
+        }
+        .secret-link:hover { background: red; color: white; }
+        
+        .retro-footer {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #F0E0D6;
+            border: 2px dashed #D9BFB7;
+            padding: 10px 20px;
+            z-index: 10;
+            cursor: grab;
+        }
+        .retro-footer:active { cursor: grabbing; }
+
+        /* RETRO LIGHTBOX / IMAGE VIEWER POPUP */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox-content {
+            background: #F0E0D6;
+            border: 3px double #800000;
+            padding: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+            position: relative;
+            max-width: 85%;
+            max-height: 85%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        .lightbox-header {
+            width: 100%;
+            background: #EA8;
+            color: #800000;
+            font-weight: bold;
+            padding: 4px 8px;
+            margin-bottom: 10px;
+            font-size: 9pt;
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            border: 1px solid #800000;
+            font-family: monospace;
+        }
+        .lightbox-close {
+            cursor: pointer;
+            color: #800000;
+            font-weight: bold;
+        }
+        .lightbox-close:hover {
+            color: #ff0000;
+        }
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 70vh;
+            border: 2px solid #000;
+            object-fit: contain;
+        }
+        .lightbox-caption {
+            margin-top: 8px;
+            font-size: 8.5pt;
+            color: #800000;
+            font-family: monospace;
+            word-break: break-all;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 4CHAN TOP NAVIGATION BAR -->
+    <div class="board-nav">
+        [ <span class="boards">
+            <a href="#" title="Anime & Manga">a</a> / 
+            <a href="#" title="Cyberpunk">cyber</a> / 
+            <a href="#" title="Design">d</a> / 
+            <a href="#" title="Diary">/diary/</a> / 
+            <a href="#" title="Technology">g</a> / 
+            <a href="file:///C:/Users/hazel/OneDrive/Documents/mu.html#" title="Music">mu</a> / 
+            <a href="#" title="Outdoors">out</a> / 
+            <a href="#" title="Paranormal">x</a>
+        </span> ]
+    </div>
+
+    <!-- MAIN BOARD -->
+    <div class="main-board">
+        <div class="board-title">/diary/ - The Webmaster is Dreaming</div>
+
+<hr>
+        <!-- INTERACTIVE MOCK POST FORM -->
+        <div class="postarea">
+            <table class="postform">
+                <tr>
+                    <td class="postblock">Name</td>
+                    <td><input type="text" size="28" value="Anonymous"></td>
+                </tr>
+                <tr>
+                    <td class="postblock">Options</td>
+                    <td><input type="text" size="28" placeholder="sage"></td>
+                </tr>
+                <tr>
+                    <td class="postblock">Comment</td>
+                    <td><textarea cols="48" rows="4" placeholder="Don't bother."></textarea></td>
+                </tr>
+                <tr>
+                    <td class="postblock">Submit</td>
+                    <td><button id="submit-btn">Post Message</button></td>
+                </tr>
+            </table>
+        </div>
+		
+
+        <div class="thread" id="t2">
+            <div class="post-header">
+                <input type="checkbox"> <span class="subject">lets all accelerate kali yuga together <3</span> <span class="name">Anonymous</span> 07/18/26(Wed)11:00 <span class="postnum">No. 1496333</span>
+            </div>
+            <div class="post-message">
+                the gnostics called it kenoma - the void, emptiness masquerading as substance. looking at the stock market tickers, war feeds, endless cycle of debt slavery...it's a ritual of inversion. they're using the principles of the left-hand path to harvest the kinestic potential of the population. consecrating our time to a servitor that doesnt exist. if we all stopped believing in 'the state' as a physical entity, it would cease to exist. but the spell is reinforced by EM-resonance. they keep the populace vibrating at the exact frequency of the archons. you can feel it everytime you participate: the low humming vibration. i hate myself fr keeping the Black Sun centered over the sky...it's enough to drive one to suicide.
+            </div>
+        </div>
+        <hr>
+
+        <!-- POST 1: J-FASHION -->
+        <div class="thread" id="t3">
+            <div class="fileinfo">File: <a href="#">CD_collection.jpg</a> (643x555)</div>
+            <img src="https://i.imgur.com/ZVXBTgZ.png" width="250vh" class="thumb">
+            <div class="post-header">
+                <input type="checkbox"> <span class="subject">CD Collection</span> <span class="name">Anonymous</span> 07/03/26(Sat)14:22 <span class="postnum">No. 1505012</span>
+                 <div class="post-message">
+                no one cares but my CD collection is growing! lots of Japanese ones from my trip, including a quadruple-signed tokenainamae one from a concert i got to attend. the one without a graphic is from my ex oomf my little pony is jesus god is me, she ended up being sort of a predator apparently so i never followed her new account. the PS2 case is from my other oomf garden angel, it's #16 our of 20 that were printed so i feel pretty special!<br>vivi (the stomach book vivi...not me) signed one of my CDs the 2nd time i got to see her. i always feel bothersome when asking for stuff like that, sometimes i can tell the artist has a bit of social anxiety like me but they're always polite anyways.<br>a couple of my favorite albums, i have attained physically. like choke enough by oklou and my two poison girl friend albums. and my two fav stomahc book albums!<br>my #1 
+				material desire is a <a href="file:///C:/Users/hazel/OneDrive/Documents/sstrawberry.html">strawberry switchblade</a> CD but they are pretty expensive.
+            </div>
+            </div>
+			       <hr>        
+		        <div class="thread" id="t11">
+				<div class="fileinfo">File: <a href="#">click here</a> (643x555)</div>
+            <img src="https://i.imgur.com/XZeS64q.jpeg" width="300vh" class="thumb">
+            <div class="post-header">
+                <input type="checkbox"> <span class="subject">lets all take benadryl together <3</span> <span class="name">Anonymous</span> 07/01/26(Wed)11:00 <span class="postnum">No. 1496333</span>
+            </div>
+            <div class="post-message">
+                i figure i'll release all of these files to a new github page before i hang myself. i would just publicize this one, but it's embarrassing that ppl can see all of my past updates. i'd like an empty slate. idk if there's a point to this website at all, or whether it's overall worse that i made it.<br><br>i hacked my bangs short. i think i look better with short bangs. summertime always makes me want to cut my hair short. but im resisting/
+            </div>
+        </div>
+        <hr>
+
+
+        <div class="thread" id="t7">
+            
+            <div class="post-header">
+                <input type="checkbox"> <span class="subject">LSD Dream Log #1</span> <span class="name">Anonymous</span> 3/12/24(Thu)04:30 <span class="postnum">No. 1495000</span>
+            </div>
+            <div class="post-message">
+                Another car accident dream. My dad was driving this time. There was a truck coming towards us, it was going the wrong way down the road. My dad quickly served to avoid it but somehow spun out and hit another car, landing us on some rocks looking over a cliffside. We were okay, but the guy we hit died. More ambulances and bystanders lined the streets than you'd expect. I think I'd rather be the one who dies in a crash, than to experience being on the other side of that tragedy. It's really horrific.
+            </div>
+        </div>		<!-- MID-PAGE AD PLACEHOLDER -->
+		        <div class="ad-placeholder ad">
+            <a href="https://onlyshojo.com"><img src="https://i.imgur.com/kRjeojZ.gif" width="520vh"></a>
+        </div>
+            <hr>
+			        <!-- POST 4: YUME NIKKI -->
+        <div class="thread" id="t4">
+            <div class="fileinfo">File: <a href="#">nexus_door.gif</a> (2.1 MB)</div>
+            <img src="https://i.imgur.com/K7Hp15Y.png" width="300" class="thumb">
+            <div class="post-header">
+                <input type="checkbox"> <span class="subject">Lain's room</span> <span class="name">Anonymous</span> 07/25/25(Wed)01:12 <span class="postnum">No. 1498111</span>
+            </div>
+            <div class="post-message">
+                My coding setup right now. There is no limit to the larp
+            </div>
+        </div>
+        
+            <hr>
+			        <div class="thread" id="t2">
+            <div class="post-header">
+                <input type="checkbox"> <span class="subject">trooning</span> <span class="name">Anonymous</span> 08/18/25(Wed)11:00 <span class="postnum">No. 1496333</span>
+            </div>
+            <div class="post-message">
+                i'm a girl but i wish i was born in a male body. i don't want to be a man and i'm feminine presenting. i think even if i were born a man, i'd want long hair. and i'd wear androgynous clothing. i just want to be bigger and have a deeper voice, and be seen as a guy. when i was younger i used to envy trans women so much, not how much they suffer but i wish i could have an amab body and just be a fem presenting person. i wonder if i'd feel more secure or still be trying to make myself as small as possible. i would probably feel less confident when i would try to wear skirts or dresses. but i'd feel so much more entitled to my space. i like the way my long hair makes my body look proportionately smaller. i like being percieved as little and i know my image affects how others treat me. but i hate feeling weak and pathetic all of the time. but then i see a man with long hair and i can feel the aura...or maybe its attraction or maybe both
+            </div>
+        </div>
+			        <hr>
+			<div class="thread" id="t5">
+            <div class="post-header">
+                <input type="checkbox"> <span class="subject">i hate the world im living in</span> <span class="name">Anonymous</span> 07/13/25(Sat)18:44 <span class="postnum">No. 1497555</span>
+                <a href="#" class="toggle-replies" data-thread="t5">[Hide Replies]</a>
+            </div>
+		<div class="post-message">
+                <span class="greentext">> "yOu shOuLd UsE ReACt aND CSS gRid, foR yoUr fUtuRe poRtfOLio'S saKe"</span><br>
+                erm. dude. If my website doesn't require a marquee tag and table-based layouts to hold the background images together, IDC about it. seriously, WHAT FUTURE PORTFOLIO????/?i refuse to feed the egregore... 
+            </div>
+
+            <!-- REPLIES TO THREAD 5 -->
+            <div class="replies-wrapper">
+                <div class="reply-container">
+                    <div class="reply">
+                        <div class="post-header">
+                            <input type="checkbox"> <span class="name">Anonymous</span> 10/21/26(Sat)19:02 <span class="postnum">No. 1497602</span>
+                        </div>
+                        <div class="post-message">
+                            <span class="greentext">>>1497555</span><br>
+                            i am an evangelical mossad agent and this is my number one advice to hobbyist coders
+                        </div></div></div>
+						<div class="reply-container">
+                    <div class="reply">
+                        <div class="post-header">
+                            <input type="checkbox"> <span class="name">Anonymous</span> 11/04/06(Sat)14:55 <span class="postnum">No. 1505091</span>
+                        </div>
+                        <div class="post-message">
+                            <span class="greentext">>>1505012</span><br>
+                            don't forget the "just become an AI coder!" even my doctor told me this. GLOWIE GET OUT OF MY HEAD
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <!-- MID-PAGE AD PLACEHOLDER -->
+        <div class="ad-placeholder ad">
+            <a href="https://lainchan.org"><img src="https://i.imgur.com/o4BDh3h.png" width="520vh"></a>
+        </div>
+
+        <hr>
+
+        <!-- POST 6: SKRAMZ -->
+        <div class="thread" id="t6">
+            <div class="fileinfo">File: <a href="#">cemetery.png</a> (800 KB)</div>
+            <img src="https://i.imgur.com/OLScpN7.png" width="300"  class="thumb">
+            <div class="post-header">
+                <input type="checkbox"> <span class="subject">sell all you have, give it to the kittens.</span> <span class="name">Anonymous</span> 10/18/06(Wed)11:00 <span class="postnum">No. 1496333</span>
+				<div class="post-message">
+                a photo from the year i spent my birthday at family/s house in wisconsin. my arms were the reason i hated these pics and wearing anything sleeveless in general. they used to be flabby but have since slimmed down a lot. my distribution just changed i guess. it's a cool picture though.
+            </div>
+            </div>
+        </div>
+
+        <hr>
+		<div class="thread" id="t6">
+            <div class="post-header">
+                <input type="checkbox"> <span class="subject">most brutally honest stranger ever</span> <span class="name">Anonymous</span> 11/04/25(Sat)14:22 <span class="postnum">No. 1505012</span>
+            </div>
+            <div class="post-message">
+                <span class="greentext">> be me, looking at the water below</span><br>
+                <span class="greentext">> jumping crosses my mind but i ultimately start walking away</span><br>
+				<span class="greentext">> drunk lady across the street shouts, "i thought you were gonna jump off!"</span><br>
+                <span class="greentext">> bewildered so i just say sorry and continue walking</span><br>
+				<span class="greentext">> hear her call out "If you;re gonna kys, just do it already!"</span><br>
+				<span class="greentext">> ignore it but inside feel really hurt and shocked</span><br>
+				<span class="greentext">> avoid going outside for weeks</span><br><br>
+                This was a year ago but it's still one of the most hurtful things a stranger has said to me. 
+         
+                           </div>
+        </div> <hr>
+
+        <!-- POST 4: YUME NIKKI -->
+        <div class="thread" id="t4">
+            <div class="fileinfo">File: <a href="#">nexus_door.gif</a> (2.1 MB)</div>
+            <img src="https://i.imgur.com/1fombyC.png" width="300" class="thumb">
+            <div class="post-header">
+                <input type="checkbox"> <span class="subject">i have no one</span> <span class="name">Anonymous</span> 07/25/23(Wed)01:12 <span class="postnum">No. 1498111</span>
+            </div>
+        </div>
+        <hr>
+        
+        <!-- POST 2: BANANA PEEL -->
+        <div class="thread" id="t2">
+            <div class="fileinfo">File: <a href="#">slipped.mp4</a> (112 KB)</div>
+            <video controls  class="thumb" width="200vh"><source src="https://files.catbox.moe/ns452f.mp4" type="video/mp4 ">
+              Your browser doesn't support the video tag! :(  but u can view the video <a href="https://files.catbox.moe/ns452f.mp4">here</a> instead
+            </video>
+            <div class="post-header">
+                <input type="checkbox"> <span class="subject">Banana peel</span> <span class="name">Anonymous</span> 11/02/06(Thu)09:15 <span class="postnum">No. 1502100</span>
+            </div>
+            <div class="post-message">
+                my retard laugh makes this even funnier i think. i have no idea why i lauged like that. he hit me over the head with a baseball bat im serious. and it felt like a kiss.
+            </div>
+        </div>
+        <hr>
+
+        <!-- POST 8: CURSOR RANT -->
+<div class="thread" id="t8">
+            <div class="fileinfo">File: <a href="#">toilet.png</a> (800 KB)</div>
+            
+            <div class="post-header">
+                <input type="checkbox"> <span class="subject"></span> <span class="name">Anonymous</span> 10/18/06(Wed)11:00 <span class="postnum">No. 1496333</span>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- BOTTOM AD PLACEHOLDER -->
+        <div class="ad-placeholder ad">
+            <a href="https://ynoproject.net/"><img src="https://i.imgur.com/yRJrJr7.png" width="520vh"></a>
+        </div>
+
+        <!-- DRAGGABLE FOOTER ZONE -->
+        <div class="footer-wrapper">
+            <a href="deep_web.html" class="secret-link">u found me...</a>
+            
+            <div class="retro-footer" id="drag-footer">
+                [<a href="#">Return</a>] [<a href="#">Top</a>] [<a href="#">Update</a>]<br>
+                <i>rub my bellay</I>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RETRO LIGHTBOX (DYNAMIC CONTAINER) -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <div class="lightbox-header">
+                <span>View Image</span>
+                <span class="lightbox-close" id="lightbox-close">[X]</span>
+            </div>
+            <img id="lightbox-img" class="lightbox-img" src="" alt="Enlarged view">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        // 1. TROLL SUBMIT BUTTON SCRIPT
+        const submitBtn = document.getElementById('submit-btn');
+        let dodges = 0;
+
+        submitBtn.addEventListener('mouseover', () => {
+            if (dodges < 3) {
+                const x = (Math.random() - 0.5) * 150;
+                const y = (Math.random() - 0.5) * 150;
+                submitBtn.style.transform = `translate(${x}px, ${y}px)`;
+                dodges++;
+            }
+        });
+
+        submitBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert("UPLOAD FAILED:\nYour IP address is leaking ectoplasm. Please cleanse your router with sage and try again.");
+            submitBtn.style.transform = `translate(0px, 0px)`;
+            dodges = 0;
+        });
+
+        // 2. DRAGGABLE FOOTER SCRIPT
+        const footer = document.getElementById('drag-footer');
+        let isDragging = false;
+        let startX, startY, initialLeft, initialTop;
+
+        footer.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            
+            const style = window.getComputedStyle(footer);
+            initialLeft = parseInt(style.left, 10);
+            initialTop = parseInt(style.top, 10);
+            
+            footer.style.transform = "none";
+            footer.style.left = initialLeft + "px";
+            footer.style.top = initialTop + "px";
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                footer.style.left = (initialLeft + dx) + 'px';
+                footer.style.top = (initialTop + dy) + 'px';
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // 3. RETRO LIGHTBOX / IMAGE VIEWER SCRIPT
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        document.querySelectorAll('.thumb').forEach(img => {
+            img.addEventListener('click', () => {
+                // If it's a video, don't open in lightbox (keep existing control behavior)
+                if (img.tagName.toLowerCase() === 'video') return;
+
+                lightboxImg.src = img.src;
+                
+                const fileinfo = img.previousElementSibling;
+                if (fileinfo && fileinfo.classList.contains('fileinfo')) {
+                    lightboxCaption.innerText = fileinfo.innerText;
+                } else {
+                    const filename = img.src.split('/').pop().split('?')[0] || "image_file.jpg";
+                    lightboxCaption.innerText = `File: ${filename}`;
+                }
+                
+                lightbox.style.display = 'flex';
+            });
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target === lightboxClose) {
+                lightbox.style.display = 'none';
+                lightboxImg.src = '';
+            }
+        });
+
+        // 4. HIDE/SHOW REPLIES TOGGLE SCRIPT
+        document.querySelectorAll('.toggle-replies').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const threadId = btn.getAttribute('data-thread');
+                const thread = document.getElementById(threadId);
+                const wrapper = thread.querySelector('.replies-wrapper');
+                
+                if (wrapper) {
+                    if (wrapper.style.display === 'none') {
+                        wrapper.style.display = 'block';
+                        btn.innerText = '[Hide Replies]';
+                    } else {
+                        wrapper.style.display = 'none';
+                        btn.innerText = '[Show Replies]';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
