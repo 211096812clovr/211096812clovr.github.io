@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>cat's cradle</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Sometype+Mono:ital@0;1&family=Space+Mono:ital@0;1&family=Playfair+Display:ital@0;1&family=VT323&family=Oswald:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Sometype+Mono:ital@0;1&family=Space+Mono:ital@0;1&family=Playfair+Display:ital@0;1&family=VT323&family=Oswald:wght@300;400&family=Griffy&display=swap');
+        /* --- theme --- */
+        :root {
+            --bg-img: url('https://i.imgur.com/tQSIGl8.jpeg');
+            --box-bg: rgba(240, 248, 255, 0.45);
+            --box-border: rgba(100, 130, 160, 0.6);
+            --font-head: 'Cormorant Garamond', serif;
+            --font-body: 'Sometype Mono', monospace;
+            --text-main: #1c2b36; 
+            --text-dim: #435b6e;  
+            --accent: #2a4c6a;   
+            --particle-color: rgba(255, 255, 255, 0.85);
+            --particle-behavior: "snow";
+            --hud-line: rgba(70, 100, 130, 0.5); 
+            
+           
+            --box-radius: 12px;
+            --box-border-style: solid;
+            --box-border-width: 1px;
+            --box-shadow: 0 8px 32px rgba(100, 120, 140, 0.15), inset 0 0 15px rgba(255,255,255,0.8);
+            
+            
+            --pos-title-top: 10%; --pos-title-right: 8%; --pos-title-left: auto; --pos-title-bottom: auto;
+            --pos-quote-top: 31%; --pos-quote-right: 8%; --pos-quote-left: auto; --pos-quote-bottom: auto;
+            --pos-lastfm-top: 50%; --pos-lastfm-right: 8%; --pos-lastfm-left: auto; --pos-lastfm-bottom: auto;
+        }
+            
+
+        body.theme-2 {
+            
+          
+            --bg-img: url('https://i.imgur.com/ktd2R5Q.gif');
+             --box-bg: rgb(45, 86, 121)
+			 
+            --box-border: rgba(0, 0, 255, 0.15);
+
+            --font-head: 'Playfair Display', serif;
+
+            --font-body: 'Space Mono', monospace;
+
+            --text-main: #dce9df;
+
+            --text-dim: #bfe4ec;
+
+            --accent: #cbe8dd;
+
+            --particle-color: rgb(137, 201, 222);
+
+            --particle-behavior: "embers"; 
+            --hud-line: rgba(0, 150, 255, 0.3);
+            
+            --box-radius: 30px 10px 30px 10px;
+            --box-border-style: dashed;
+            --box-border-width: 2px;
+            --box-shadow: 0 15px 35px rgba(0, 10, 30, 0.6), inset 0 0 20px rgba(0, 150, 255, 0.15);
+            
+            /* Box Positions Theme 2 */
+            --pos-title-top: auto; --pos-title-right: auto; --pos-title-left: 8%; --pos-title-bottom: 40%;
+            --pos-quote-top: auto; --pos-quote-right: auto; --pos-quote-left: 8%; --pos-quote-bottom: 19.45%;
+            --pos-lastfm-top: auto; --pos-lastfm-right: auto; --pos-lastfm-left: 8%; --pos-lastfm-bottom: 10%;
+        
+        }
+body.theme-3 {
+  
+  --box-radius: 0.5px;
+    --box-border-style: solid;
+    --box-border-width: .028em;
+    --box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 0 20px rgba(255,255,255,0.3);
+	--box-border-image-slice: 240 240 240 240;
+    --box-border-image-width: 2.9vw 2.9vw 2.9vw 2.9vw;
+    --box-border-image-outset: 0.8vw 0.8vw 0.8vw 0.8vw;
+    --box-border-image-repeat: repeat repeat;
+    --box-border-image: url('https://i.imgur.com/oZbob5c.png') !important;
+    --bg-img: url('https://i.imgur.com/EfNw74P.jpg');
+    
+    
+    --box-bg: linear-gradient(135deg, #ff00ff, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff);
+    --box-border: black;
+
+    
+    --font-head: 'Griffy', cursive;
+    --font-body: 'Griffy', cursive;
+    --text-main: black;
+    --text-dim: black;
+    --accent: #ffffff;
+    
+    --particle-color: black;
+    --particle-behavior: "ash";
+    --hud-line: rgba(255, 255, 255, 0.5);
+    
+    
+   
+    --pos-title-top: 25%; --pos-title-right: auto; --pos-title-left: 35%; --pos-title-bottom: auto;
+    --pos-quote-top: 50%; --pos-quote-right: auto; --pos-quote-left: 35%; --pos-quote-bottom: auto;
+    --pos-lastfm-top: 75%; --pos-lastfm-right: auto; --pos-lastfm-left: 35%; --pos-lastfm-bottom: auto;
+}
+       
+        #title-block {
+            position: absolute;
+            top: var(--pos-title-top); right: var(--pos-title-right); left: var(--pos-title-left); bottom: var(--pos-title-bottom);
+            z-index: 10; width: 60vh; transition: all 1.5s ease;
+        }
+        #waster-quote {
+            position: absolute;
+            top: var(--pos-quote-top); right: var(--pos-quote-right); left: var(--pos-quote-left); bottom: var(--pos-quote-bottom);
+            z-index: 10; width: 60vh; transition: all 1.5s ease;
+        }
+        #lastfm {
+            position: absolute;
+            top: var(--pos-lastfm-top); right: var(--pos-lastfm-right); left: var(--pos-lastfm-left); bottom: var(--pos-lastfm-bottom);
+            z-index: 10; width: auto; transition: all 1.5s ease;
+        }
+
+        
+        html, body { margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden; background-color: #000; user-select: none; }
+        #bg-layer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: var(--bg-img); background-size: cover; background-position: center; z-index: 0; transition: background-image 1.5s ease-in-out; }
+        body { font-family: var(--font-body); color: var(--text-main); transition: color 1.5s ease, font-family 1.5s ease; }
+        .film-grain { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 999; opacity: 0.35; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); mix-blend-mode: overlay; }
+        #particles { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1; }
+        
+        
+.text-box { 
+            /* Changed from background-color to background to support gradients */
+            background: var(--box-bg); 
+            border: var(--box-border-width, 1px) var(--box-border-style, solid) var(--box-border, rgba(255,255,255,0.4));
+            border-radius: var(--box-radius, 12px);
+            box-shadow: var(--box-shadow, 0 10px 30px rgba(0,0,0,0.3));
+            padding: 2%; 
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px); 
+            transition: all 0.2s ease; 
+        }
+        
+        h1 { font-family: var(--font-head); font-weight: 300; font-size: 3.8rem; margin: 0; line-height: 1; letter-spacing: 2px; color: var(--text-main); text-transform: lowercase; }
+        .subtitle { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 4px; margin-top: 15px; color: var(--text-dim); }
+        .vertical-log { position: absolute; right: 40px; top: 15%; writing-mode: vertical-rl; font-size: 0.7rem; letter-spacing: 6px; color: var(--hud-line); text-transform: uppercase; z-index: 5; transition: color 1.5s ease;}
+        .hud-line-h { position: absolute; height: 1px; background: var(--hud-line); z-index: 2; transition: background 1.5s ease;}
+        #lastfm { display: flex; align-items: center; gap: 15px; font-size: 0.9rem; padding: 15px 20px; }
+        .hidden { display: none !important; }
+
+        /* --- images --- */
+        .scatter-img { 
+            position: absolute; 
+            z-index: 100; 
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            cursor: zoom-in; 
+            display: none; 
+        } 
+		.scatter-imgd { 
+            position: absolute; 
+            z-index: 100; 
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            display: none; 
+        } 
+
+        /* show */
+        body:not(.theme-2):not(.theme-3) .img-t1 { display: block; }
+        body.theme-2 .img-t2 { display: block; }
+        body.theme-3 .img-t3 { display: block; }
+
+        
+        .scatter-img img { 
+            display: block; 
+            width: 100%; 
+            height: auto; 
+            mask-image: radial-gradient(circle, black 65%, transparent 100%); 
+            -webkit-mask-image: radial-gradient(circle, black 65%, transparent 100%); 
+            opacity: 0.86; 
+            transition: opacity 0.2s ease; 
+        }
+        .scatter-img:hover { transform: scale(1.2) !important; }
+        .scatter-img:hover img { opacity: 1; }
+
+        #theme-toggle { position: absolute; bottom: 40px; right: 40px; z-index: 100; background: var(--box-bg); border: 1px solid var(--box-border); padding: 10px 15px; color: var(--text-dim); font-family: var(--font-body); font-size: 0.8rem; text-transform: lowercase; cursor: pointer; backdrop-filter: blur(5px); }
+        #theme-toggle:hover { color: var(--text-main); border-color: var(--accent); background: rgba(0,0,0,0.5); }
+        #theme-toggle::before { content: '>> '; color: var(--accent); }
+		/* --- fix theme 3 lol --- */
+body.theme-3 #title-block {width: 27vh; 
+    font-size: 1rem; 
+	white-space: nowrap;
+    left: 93% !important; 
+    top: 5% !important; 
+    text-align: center;} 
+body.theme-3 #waster-quote { 
+   width: 30vh; 
+   height: 1vh;
+   white-space: nowrap;
+    font-size: 0.5rem; 
+    left: 76% !important; 
+    top: 82% !important; 
+    text-align: center; 
+}
+
+body.theme-3 img {opacity: 1 !important; }
+body.theme-3 #lastfm { 
+    width: 160vh; 
+    font-size: 7rem; 
+	white-space: nowrap;
+    left: 24% !important; 
+    top: 30% !important; 
+    text-align: center;
+	padding: 0px;
+}
+
+body.theme-3 .text-box {
+    background: linear-gradient(135deg, #ff00ff, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff) !important;
+}
+
+.img-t3-extra {
+    display: none;
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+body.theme-3 .img-t3-extra { display: block; }
+.img-t3-extra:hover { transform: rotate(15deg) scale(1.1); }
+    </style>
+</head>
+<body>
+    <div id="bg-layer"></div>
+    <div class="film-grain"></div>
+    <canvas id="particles"></canvas>
+
+    <div class="hud-line-h" style="top: 25%; left: 0; width: 6%;">&nbsp;</div>
+    <div class="hud-line-h" style="top: 75%; right: 0; width: 15%;">&nbsp;</div>
+    <div class="vertical-log" style="z-index:102">A THOUSAND WINTERS OF LONELINESS // A DOZEN SUMMERS AGAINST THE WORLD</div>
+
+    <div class="scatter-imgd img-t1" style="bottom: 0%; left: 0%; width: 20vh; 	white-space: nowrap;">
+        <a href="/doomedyuri">strwbarrys<br><a href="">blader</a><br>
+		loneliness<br>emptiness<br>afraid<br>long road ahead<br>pls help
+    </div>
+    <div class="scatter-img img-t2" style="bottom: 2%; left: 0%; width: 20vh;">
+        <img src="https://i.imgur.com/Y9WW8ua.gif" alt="fragment 2">
+    </div>
+    <div class="scatter-img img-t3" style="bottom: 10%; right: 10%; width: 280px;">
+        <img src="https://i.imgur.com/Cek41R9.gif" alt="fragment 3">
+    </div>
+
+    <div id="title-block" class="text-box">
+        <h1>cat's cradle</h1>
+        <div class="subtitle"></div>
+    </div>
+    <div id="waster-quote" class="text-box">
+        a tangle of threads, no obvious pattern or knot. 
+        i’m tired of trying to pull it apart. is it okay if we only sit here?
+    </div>
+
+    <div id="lastfm" class="text-box hidden">
+         <svg id="music-note" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:20px; height:20px; stroke: var(--accent);">
+
+            <path stroke-linecap="round" stroke-linejoin="round" d="m9 9 10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z" />
+
+        </svg>
+
+        <div id="song-text">synchronizing...</div>
+
+        <canvas id="equalizer" width="18" height="15"></canvas>
+
+    </div>
+
+    <button id="theme-toggle">shift channel</button>
+
+<script>
+    const themes = ['theme-1', 'theme-2', 'theme-3'];
+    let currentThemeIndex = 0;
+    const body = document.body;
+    const themeBtn = document.getElementById('theme-toggle');
+
+    themeBtn.addEventListener('click', () => {
+        if (currentThemeIndex !== 0) { body.classList.remove(themes[currentThemeIndex]); }
+        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+        if (currentThemeIndex !== 0) { body.classList.add(themes[currentThemeIndex]); }
+    });
+
+    // --- EQUALIZER ANIMATION ---
+    function drawEqualizer() {
+        const eqCanvas = document.getElementById("equalizer");
+        if (!eqCanvas) return;
+        const eqCtx = eqCanvas.getContext("2d");
+        const accentColor = getComputedStyle(document.body).getPropertyValue('--accent').trim();
+        
+        eqCtx.clearRect(0, 0, eqCanvas.width, eqCanvas.height);
+        eqCtx.fillStyle = accentColor;
+        
+        // draw 3 bars
+        for (let i = 0; i < 3; i++) {
+            let height = Math.random() * 12 + 3; // Random height between 3 and 15
+            eqCtx.fillRect(i * 6, 15 - height, 4, height);
+        }
+    }
+    // update equalizer every 200ms
+    setInterval(drawEqualizer, 200);
+
+    // --- particles
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let particlesArray = [];
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    class Particle { constructor() { this.reset(); this.y = Math.random() * canvas.height; } reset() { this.x = Math.random() * canvas.width; this.y = -10; this.size = Math.random() * 2 + 0.5; this.vx = (Math.random() * 1) - 0.5; this.vy = (Math.random() * 1) + 0.5; } update() { const behavior = getComputedStyle(body).getPropertyValue('--particle-behavior').trim().replace(/"/g, ''); if (behavior === 'embers') { this.y -= this.vy * 0.8; this.x += this.vx * 2; if (this.y < -10) this.y = canvas.height + 10; } else if (behavior === 'ash') { this.y += this.vy * 0.5; this.x += Math.sin(this.y * 0.05) * 0.5; if (this.y > canvas.height + 10) this.reset(); } else { this.y += this.vy; this.x += this.vx + 0.5; if (this.y > canvas.height + 10) this.reset(); } if (this.x > canvas.width + 10) this.x = -10; if (this.x < -10) this.x = canvas.width + 10; } draw() { ctx.beginPath(); ctx.fillStyle = getComputedStyle(body).getPropertyValue('--particle-color').trim() || 'rgba(255,255,255,0.8)'; ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); } }
+    function initParticles() { particlesArray = []; for (let i = 0; i < 120; i++) { particlesArray.push(new Particle()); } }
+    function animateParticles() { ctx.clearRect(0, 0, canvas.width, canvas.height); particlesArray.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
+    resizeCanvas(); window.addEventListener("resize", resizeCanvas); initParticles(); animateParticles();
+
+    // --- LAST.FM FETCH ---
+    function getSong() { fetch(`https://lastfm-last-played.biancarosa.com.br/exholalia/latest-song`).then((res) => res.json()).then((res) => { if (res && res.track) { const artist = res.track.artist["#text"]; const trackName = res.track.name; document.getElementById("song-text").textContent = `${artist.toLowerCase()} - ${trackName.toLowerCase()}`; document.getElementById("lastfm").classList.remove("hidden"); } }).catch(err => { document.getElementById("song-text").textContent = "signal lost..."; document.getElementById("lastfm").classList.remove("hidden"); }); }
+    getSong(); setInterval(getSong, 15000); 
+</script>
+</body>
+</html>
